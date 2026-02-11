@@ -26,4 +26,5 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByEmail(String username) {
         return userRepository.findByEmail(username);
     }
+
 }

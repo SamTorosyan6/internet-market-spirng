@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @RequiredArgsConstructor
@@ -52,21 +51,6 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService users(PasswordEncoder encoder) {
-//        UserDetails user = User.withUsername("user")
-//                .password(encoder.encode("password"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User.withUsername("admin")
-//                .password(encoder.encode("admin123"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 
     @Bean
     DaoAuthenticationProvider authenticationProvider(UserDetailsService uds, PasswordEncoder encoder) {

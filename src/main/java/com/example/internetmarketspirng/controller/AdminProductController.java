@@ -33,6 +33,7 @@ public class AdminProductController {
     public String addPage(ModelMap modelMap) {
         modelMap.addAttribute("categories", categoryService.findAll());
         modelMap.addAttribute("product", new Product());
+        modelMap.addAttribute("mode", "add");
         return "admin/product-form";
     }
 
@@ -61,4 +62,41 @@ public class AdminProductController {
         }
         return "redirect:/admin/products";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editPage(@PathVariable int id, ModelMap modelMap) {
+        Product product = productService.findById(id);
+        modelMap.addAttribute("product", product);
+        modelMap.addAttribute("categories", categoryService.findAll());
+        modelMap.addAttribute("mode", "edit");
+        return "admin/product-form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String edit(
+            @PathVariable int id,
+            @ModelAttribute Product formProduct,
+            @RequestParam("categoryId") int categoryId,
+            @RequestParam(value = "image", required = false) MultipartFile image
+    ) {
+        Product dbProduct = productService.findById(id);
+        if (dbProduct == null) {
+            return "redirect:/admin/products";
+        }
+
+        dbProduct.setTitle(formProduct.getTitle());
+        dbProduct.setPrice(formProduct.getPrice());
+        dbProduct.setDescription(formProduct.getDescription());
+        dbProduct.setCategory(categoryService.findById(categoryId));
+
+        if (image != null && !image.isEmpty()) {
+            imageStorageService.deleteIfExists(dbProduct.getPicName());
+            String newPicName = imageStorageService.saveProductImage(image);
+            dbProduct.setPicName(newPicName);
+        }
+
+        productService.save(dbProduct);
+        return "redirect:/admin/products";
+    }
+
 }

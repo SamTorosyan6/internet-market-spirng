@@ -32,4 +32,13 @@ public class AdminCategoryController {
         categoryService.deleteById(id);
         return "redirect:/admin/categories";
     }
+
+    @GetMapping("/edit")
+    public String edit(@RequestParam int id, ModelMap modelMap) {
+        modelMap.addAttribute("categories", categoryService.findAll());
+        modelMap.addAttribute("category", categoryService.findById(id));
+        return "admin/categories";
+    }
+
+
 }

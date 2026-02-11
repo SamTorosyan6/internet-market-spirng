@@ -32,6 +32,7 @@
                     <td th:text="${p.price}"></td>
                     <td th:text="${p.category != null ? p.category.name : '-'}"></td>
                     <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" th:href="@{/admin/products/edit/{id}(id=${p.id})}">Edit</a>
                         <a class="btn btn-sm btn-outline-danger" th:href="@{/admin/products/delete(id=${p.id})}">Delete</a>
                     </td>
                 </tr>
