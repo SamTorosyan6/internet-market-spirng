@@ -9,27 +9,27 @@
     <div class="row g-3">
         <div class="col-md-4">
             <a class="card shadow-sm text-decoration-none" th:href="@{/admin/categories}">
-                <div class="card-body">
+                <div class="card-body"   th:text="#{admin.categories}">
                     <h5>Categories</h5>
-                    <p class="text-muted mb-0">Create / edit / delete categories</p>
+                    <p class="text-muted mb-0"   th:text="#{admin.createEditDeleteCategories}" >Create / edit / delete categories</p>
                 </div>
             </a>
         </div>
 
         <div class="col-md-4">
             <a class="card shadow-sm text-decoration-none" th:href="@{/admin/products}">
-                <div class="card-body">
+                <div class="card-body"   th:text="#{admin.products}">
                     <h5>Products</h5>
-                    <p class="text-muted mb-0">Add / edit / delete products + upload image</p>
+                    <p class="text-muted mb-0"   th:text="#{admin.addEditDeleteProductsUploadImage}">Add / edit / delete products + upload image</p>
                 </div>
             </a>
         </div>
 
         <div class="col-md-4">
             <a class="card shadow-sm text-decoration-none" th:href="@{/admin/users}">
-                <div class="card-body">
+                <div class="card-body"   th:text="#{admin.users}">
                     <h5>Users</h5>
-                    <p class="text-muted mb-0">View / add / delete users</p>
+                    <p class="text-muted mb-0"   th:text="#{admin.viewAddDeleteUsers}">View / add / delete users</p>
                 </div>
             </a>
         </div>

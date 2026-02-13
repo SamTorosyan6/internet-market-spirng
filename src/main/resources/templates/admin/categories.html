@@ -10,7 +10,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Categories</h3>
-        <a class="btn btn-outline-dark" th:href="@{/admin/home}">Back</a>
+        <a class="btn btn-outline-dark" th:href="@{/admin/home} " th:text="#{layout.back}">Back</a>
     </div>
 
     <div class="card shadow-sm mb-3">
@@ -19,7 +19,8 @@
                 <input type="hidden" name="id" th:value="${category.id}">
                 <input class="form-control" name="name" placeholder="Category name" required
                        th:value="${category.name}">
-                <button class="btn btn-dark" th:text="${category.id != 0} ? 'Update' : 'Add'">Add</button>
+                <button class="btn btn-dark" th:text="${category.id != 0}  ? #{admin.edit} : #{admin.addProduct}">Add
+                </button>
             </form>
 
         </div>
@@ -29,7 +30,13 @@
         <div class="card-body">
             <table class="table table-hover mb-0">
                 <thead>
-                <tr><th>ID</th><th>Name</th><th class="text-end">Action</th></tr>
+                <tr>
+                    <th>ID</th>
+                    <th th:text="#{admin.categories.name}">Name</th>
+                    Name
+                    <th class="text-end" th:text="#{admin.action}">Action</th>
+                    >Action
+                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="c : ${categories}">
@@ -37,9 +44,12 @@
                     <td th:text="${c.name}"></td>
                     <td class="text-end">
                         <a class="btn btn-sm btn-outline-primary"
-                           th:href="@{/admin/categories/edit(id=${c.id})}">Edit</a>
+                           th:href="@{/admin/categories/edit(id=${c.id})} "
+                           th:text="#{admin.edit}">Edit</a>
+
                         <a class="btn btn-sm btn-outline-danger"
-                           th:href="@{/admin/categories/delete(id=${c.id})}">Delete</a>
+                           th:href="@{/admin/categories/delete(id=${c.id})}" th:text="#{admin.edit}"
+                        >Delete</a>
                     </td>
                 </tr>
                 </tbody>
