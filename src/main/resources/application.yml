@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: internet-market-spirng
+  datasource:
+    url: jdbc:mysql://localhost:3306/internetmarket_db
+    username: admin
+    password: admin
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+internet:
+  market:
+    upload:
+      image:
+        directory:
+          path: C:/Users/samve/IdeaProjects/internet-market-spirng/src/main/resources/static/images/
+logging:
+  file:
+    name: C:/Users/samve/IdeaProjects/internet-market-spirng/log/internet-market-spring.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
+  level:
+    root: info
