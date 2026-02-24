@@ -1,17 +1,19 @@
 package com.example.internetmarketspirng.service;
 
 import com.example.internetmarketspirng.model.Product;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
 
-    List<Product> findAll();
+    Page<Product> findAll(Pageable pageable);
 
     Product save(Product product);
 
     Product findById(Integer id);
 
     void deleteById(Integer id);
+
+    Page<Product> findByCategoryId(int categoryId, Pageable pageable);
 
 }

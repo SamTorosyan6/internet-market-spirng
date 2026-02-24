@@ -6,18 +6,22 @@
 
     <h2 class="mb-3" th:text="#{admin.products}">Products</h2>
 
-    <div th:if="${#lists.isEmpty(products)}" class="alert alert-warning"
+    <!-- No products -->
+    <div th:if="${products.totalElements == 0}"
+         class="alert alert-warning"
          th:text="#{products.noProducts}">
         No products yet.
     </div>
 
-    <div class="row g-3" th:if="${!#lists.isEmpty(products)}">
-        <div class="col-md-4" th:each="p : ${products}">
+    <!-- Products list -->
+    <div class="row g-3" th:if="${products.totalElements > 0}">
+        <div class="col-md-4" th:each="p : ${products.content}">
             <a class="text-decoration-none" th:href="@{/products/{id}(id=${p.id})}">
                 <div class="card shadow-sm h-100">
                     <img th:if="${p.picName != null}"
                          th:src="@{/image/get(picName=${p.picName})}"
-                         class="card-img-top" style="height:220px; object-fit:cover;">
+                         class="card-img-top"
+                         style="height:220px; object-fit:cover;">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${p.title}">Title</h5>
                         <p class="card-text text-muted" th:text="${p.description}">Desc</p>
@@ -30,6 +34,52 @@
                 </div>
             </a>
         </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4" th:if="${products.totalPages > 1}">
+        <nav>
+            <ul class="pagination justify-content-center">
+
+                <!-- Previous -->
+                <li class="page-item"
+                    th:classappend="${products.first} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/categories/{id}/products(
+                            id=${categoryId},
+                            page=${products.number}
+                       )}">
+                        Previous
+                    </a>
+                </li>
+
+                <!-- Page Numbers -->
+                <li class="page-item"
+                    th:each="pageNumber : ${pageNumbers}"
+                    th:classappend="${pageNumber == products.number + 1} ? 'active'">
+                    <a class="page-link"
+                       th:href="@{/categories/{id}/products(
+                            id=${categoryId},
+                            page=${pageNumber}
+                       )}"
+                       th:text="${pageNumber}">
+                    </a>
+                </li>
+
+                <!-- Next -->
+                <li class="page-item"
+                    th:classappend="${products.last} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/categories/{id}/products(
+                            id=${categoryId},
+                            page=${products.number + 2}
+                       )}">
+                        Next
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
     </div>
 
 </section>
